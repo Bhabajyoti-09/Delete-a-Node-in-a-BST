@@ -1,0 +1,38 @@
+
+int Right_successor(Node* root)
+{
+    int min=0;
+    while( root!=NULL)
+    {
+        min =root->data;
+        root=root->left;
+    }
+    return min;
+}
+// Function to delete a node from BST.
+Node *deleteNode(Node *root, int X) {
+        if(root==NULL)
+        return root;
+
+        if(root->data<X)
+        {
+        root->right=deleteNode(root->right,X);
+        }
+        else if(root->data>X)
+        {
+        root->left=deleteNode(root->left,X);
+        }
+        else
+        {
+            if(root->left==NULL)
+            return root->right;
+            else if(root->right==NULL)
+            return root->left;
+            else
+            {
+            root->data = Right_successor(root->right);
+             root->right=deleteNode(root->right,root->data);
+            }
+        }
+        return root;
+}
